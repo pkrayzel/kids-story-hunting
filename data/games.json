@@ -1,0 +1,62 @@
+[
+  {
+    "id": "animals",
+    "title": "Animal hunting",
+    "description": "Find 3 markers, answer questions correctly and collect all three medals!",
+    "style": "retro",
+    "center": {
+      "latitude": 50.1478067,
+      "longitude": 14.3308591
+    },
+    "tasks": [
+      {
+        "title": "1. task",
+        "description": "Question for dog person!",
+        "coordinates": {
+          "latitude": 50.147164,
+          "longitude": 14.329678
+        },
+        "image_url": "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
+        "question": "Do you know how many legs does dog have?",
+        "options": [
+          "3 legs",
+          "4 legs",
+          "5 legs"
+        ],
+        "correct_option": "4 legs"
+      },
+      {
+        "title": "2. task",
+        "description": "Question for cat person!",
+        "coordinates": {
+          "latitude": 50.147079,
+          "longitude": 14.328401
+        },
+        "image_url": "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
+        "question": "What noise cat does?",
+        "options": [
+          "meow",
+          "bark",
+          "crow"
+        ],
+        "correct_option": "meow"
+      },
+      {
+        "title": "3. task",
+        "description": "Question for everyone!",
+        "coordinates": {
+          "latitude": 50.147084,
+          "longitude": 14.327087
+        },
+        "image_url": "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
+        "question": "Do you know which horse wear pyjamas?",
+        "options": [
+          "every horse",
+          "zebra",
+          "no one"
+        ],
+        "correct_option": "zebra"
+      }
+    ]
+  }
+]

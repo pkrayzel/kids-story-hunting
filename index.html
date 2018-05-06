@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Story Hunting for Kids</title>
+
+    <style>
+      #googleMap {
+        height: 100%;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+</head>
+
+<body>
+
+    <div id="googleMap"></div>
+    <script type="text/javascript" src="static/style.js"></script>
+    <script type="text/javascript" src="static/markers.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+
+    </script>
+    <script>
+    var map;
+    var userMarker;
+    var game;
+
+    function myMap() {
+        $.getJSON("/data/games.json", function(data) {
+            game = data[0]
+            centerPoint = { "lat": game["center"]["latitude"], "lng": game["center"]["longitude"] };
+
+            map = new google.maps.Map(document.getElementById('googleMap'), {
+                center: centerPoint,
+                zoom:18,
+                mapTypeControl: false
+            });
+
+            userMarker = new google.maps.Marker({
+               position: centerPoint,
+               icon: "static/images/bluecircle.png"
+            });
+
+            mapStyle = game["style"];
+            map.setOptions({styles: styles[mapStyle]});
+
+            setMarkers(map, game["tasks"])
+
+            function success(pos) {
+              currentPosition = { "lat": pos.coords.latitude, "lng": pos.coords.longitude };
+              userMarker.setPosition(currentPosition);
+              userMarker.setMap(map);
+              map.setCenter(currentPosition);
+
+              console.log('updating user / device coordinates: '+pos.coords.latitude+', '+pos.coords.longitude);
+
+              checkDistanceFromMarkers(pos.coords.latitude, pos.coords.longitude, game["tasks"]);
+            }
+
+            function error(err) {
+              console.warn('ERROR(' + err.code + '): ' + err.message);
+            }
+
+            var options = {
+              enableHighAccuracy: true,
+              timeout: 5000,
+              maximumAge: 0
+            };
+
+            navigator.geolocation.watchPosition(success, error, options);
+        });
+    }
+
+    </script>
+
+    <div id="content" style="width: 250px; height: 200px; background-color: white; position: absolute; left: 0px; top: 0px; opacity: 0.5;">
+        <h4>Distance from flags:</h4>
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_IZwAToW3NK5HXX3NVdhGDErmRiuIURI&callback=myMap"></script>
+
+
+</body>
+
+</html>
